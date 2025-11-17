@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quix.io Animation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 1080px;
+            height: 1080px;
+            background: #222229;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scene {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            opacity: 0;
+        }
+
+        .background-gradient {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            filter: blur(100px);
+        }
+
+        .gradient-circle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .circle-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #0064FF, transparent);
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #BD2EFF, transparent);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 1s;
+        }
+
+        .circle-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #FF7828, transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        h1 {
+            font-size: 96px;
+            font-weight: 800;
+            color: #ffffff;
+            text-align: center;
+            line-height: 1.1;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            font-size: 72px;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #0064FF, #BD2EFF, #FF7828);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .accent-blue { color: #0064FF; }
+        .accent-purple { color: #BD2EFF; }
+        .accent-orange { color: #FF7828; }
+
+        /* Data visualization elements */
+        .data-viz {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+
+        .data-point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #0064FF;
+            opacity: 0;
+        }
+
+        .data-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, #0064FF, transparent);
+            opacity: 0;
+        }
+
+        .grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 100, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 100, 255, 0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0;
+        }
+
+        /* Icon elements */
+        .icon-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 40px 0;
+        }
+
+        .icon-box {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 3px solid;
+            border-radius: 16px;
+            opacity: 0;
+        }
+
+        .box-1 {
+            border-color: #0064FF;
+            top: 0;
+            left: 0;
+        }
+        .box-2 {
+            border-color: #BD2EFF;
+            top: 0;
+            right: 0;
+        }
+        .box-3 {
+            border-color: #FF7828;
+            bottom: 0;
+            left: 0;
+        }
+        .box-4 {
+            border-color: #0064FF;
+            bottom: 0;
+            right: 0;
+        }
+
+        /* Wave animation for real-time */
+        .wave-container {
+            position: relative;
+            width: 600px;
+            height: 200px;
+            margin: 40px 0;
+        }
+
+        .wave {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: #0064FF;
+            transform-origin: left;
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 120px;
+            font-weight: 800;
+            color: #0064FF;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Background gradients -->
+        <div class="background-gradient">
+            <div class="gradient-circle circle-1"></div>
+            <div class="gradient-circle circle-2"></div>
+            <div class="gradient-circle circle-3"></div>
+        </div>
+
+        <!-- Scene 1: Main headline -->
+        <div class="scene scene-1">
+            <h1>Take control of your <span class="highlight">test data</span></h1>
+        </div>
+
+        <!-- Scene 2: All your data in one place -->
+        <div class="scene scene-2">
+            <h2>All your data<br><span class="accent-blue">in one place</span></h2>
+            <div class="icon-container">
+                <div class="icon-box box-1"></div>
+                <div class="icon-box box-2"></div>
+                <div class="icon-box box-3"></div>
+                <div class="icon-box box-4"></div>
+            </div>
+        </div>
+
+        <!-- Scene 3: Real results in real time -->
+        <div class="scene scene-3">
+            <div class="grid"></div>
+            <h2><span class="accent-purple">Real results</span><br>in real time</h2>
+            <div class="wave-container">
+                <svg width="600" height="200" viewBox="0 0 600 200" style="position: absolute;">
+                    <path id="wavePath" d="" stroke="#0064FF" stroke-width="4" fill="none" opacity="0"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Scene 4: Join test and config data -->
+        <div class="scene scene-4">
+            <h2>Join test and<br><span class="accent-orange">config data</span></h2>
+            <div class="data-viz">
+                <div class="data-line" style="top: 40%; left: 10%; width: 30%;"></div>
+                <div class="data-line" style="top: 50%; right: 10%; width: 35%;"></div>
+                <div class="data-line" style="top: 60%; left: 25%; width: 40%;"></div>
+                <div class="data-point" style="top: 40%; left: 10%;"></div>
+                <div class="data-point" style="top: 40%; left: 40%;"></div>
+                <div class="data-point" style="top: 50%; right: 10%; background: #BD2EFF;"></div>
+                <div class="data-point" style="top: 50%; right: 45%; background: #BD2EFF;"></div>
+                <div class="data-point" style="top: 60%; left: 25%; background: #FF7828;"></div>
+                <div class="data-point" style="top: 60%; left: 65%; background: #FF7828;"></div>
+            </div>
+        </div>
+
+        <!-- Scene 5: Open data formats via API -->
+        <div class="scene scene-5">
+            <h2><span class="accent-blue">Open data formats</span><br>via API</h2>
+            <div class="subtitle">{ JSON • REST • GraphQL }</div>
+        </div>
+
+        <!-- Scene 6: Closing -->
+        <div class="scene scene-6">
+            <div class="logo">QUIX</div>
+            <div class="subtitle" style="margin-top: 40px;">The platform for engineering data management</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        // Animation timeline
+        const tl = gsap.timeline({ repeat: -1 });
+
+        // Helper function to animate scene
+        function animateScene(scene, duration, customAnimation) {
+            tl.to(scene, {
+                opacity: 1,
+                duration: 0.5,
+                ease: "power2.out"
+            });
+
+            if (customAnimation) {
+                customAnimation();
+            }
+
+            tl.to(scene, {
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.in"
+            }, `+=${duration - 0.5}`);
+        }
+
+        // Scene 1: Main headline
+        animateScene('.scene-1', 5, () => {
+            tl.fromTo('.scene-1 h1',
+                { scale: 0.8, y: 50 },
+                { scale: 1, y: 0, duration: 1, ease: "back.out(1.7)" },
+                "-=0.5"
+            );
+        });
+
+        // Scene 2: All your data in one place
+        animateScene('.scene-2', 5, () => {
+            tl.fromTo('.scene-2 h2',
+                { y: 30, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+                "-=0.5"
+            );
+            tl.to('.scene-2 .icon-box', {
+                opacity: 1,
+                scale: 1,
+                stagger: 0.1,
+                duration: 0.5,
+                ease: "back.out(1.7)"
+            }, "-=0.3");
+            // Animate boxes coming together
+            tl.to('.scene-2 .icon-box', {
+                top: "50%",
+                left: "50%",
+                x: "-50%",
+                y: "-50%",
+                duration: 0.8,
+                ease: "power2.inOut",
+                stagger: 0.05
+            }, "+=0.5");
+        });
+
+        // Scene 3: Real results in real time
+        animateScene('.scene-3', 5, () => {
+            tl.to('.scene-3 .grid', {
+                opacity: 1,
+                duration: 0.5
+            }, "-=0.5");
+            tl.fromTo('.scene-3 h2',
+                { x: -30, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+                "-=0.3"
+            );
+
+            // Animated wave
+            const path = document.getElementById('wavePath');
+            let pathD = 'M 0 100 ';
+            for (let i = 0; i <= 600; i += 20) {
+                const y = 100 + Math.sin(i / 50) * 40;
+                pathD += `L ${i} ${y} `;
+            }
+            path.setAttribute('d', pathD);
+
+            tl.to('#wavePath', {
+                opacity: 1,
+                duration: 0.5
+            }, "-=0.3");
+
+            tl.to('#wavePath', {
+                strokeDasharray: "10 5",
+                strokeDashoffset: -100,
+                duration: 3,
+                ease: "none"
+            }, "-=0.3");
+        });
+
+        // Scene 4: Join test and config data
+        animateScene('.scene-4', 5, () => {
+            tl.fromTo('.scene-4 h2',
+                { scale: 0.9, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.8, ease: "power2.out" },
+                "-=0.5"
+            );
+            tl.to('.scene-4 .data-point', {
+                opacity: 1,
+                scale: 1.5,
+                stagger: 0.1,
+                duration: 0.4,
+                ease: "back.out(2)"
+            }, "-=0.3");
+            tl.to('.scene-4 .data-line', {
+                opacity: 1,
+                scaleX: 1,
+                stagger: 0.15,
+                duration: 0.6,
+                ease: "power2.out"
+            }, "-=0.2");
+        });
+
+        // Scene 5: Open data formats
+        animateScene('.scene-5', 5, () => {
+            tl.fromTo('.scene-5 h2',
+                { y: -30, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+                "-=0.5"
+            );
+            tl.fromTo('.scene-5 .subtitle',
+                { y: 30, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+                "-=0.4"
+            );
+
+            // Pulse effect on subtitle
+            tl.to('.scene-5 .subtitle', {
+                scale: 1.05,
+                duration: 0.5,
+                yoyo: true,
+                repeat: 3,
+                ease: "power1.inOut"
+            }, "-=0.3");
+        });
+
+        // Scene 6: Closing
+        animateScene('.scene-6', 5, () => {
+            tl.fromTo('.scene-6 .logo',
+                { scale: 0.5, rotation: -180, opacity: 0 },
+                { scale: 1, rotation: 0, opacity: 1, duration: 1.2, ease: "back.out(1.4)" },
+                "-=0.5"
+            );
+            tl.fromTo('.scene-6 .subtitle',
+                { y: 30, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
+                "-=0.4"
+            );
+        });
+
+        // Start animation on load
+        window.addEventListener('load', () => {
+            tl.play();
+        });
+    </script>
+</body>
+</html>
