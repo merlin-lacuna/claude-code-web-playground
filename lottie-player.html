@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottie Animation Player</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        button {
+            padding: 10px 20px;
+            background: #ff1493;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #c71585;
+        }
+        select {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background: #2a2a2a;
+            color: white;
+            font-size: 14px;
+        }
+        #lottie-container {
+            background: #2a2a2a;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #2a2a2a;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lottie Animation Player</h1>
+
+        <div class="controls">
+            <select id="file-select">
+                <option value="Scene.json">Scene.json (Original - 9.4MB)</option>
+                <option value="Scene-no-images.json" selected>Scene-no-images.json (Pink placeholders - 921KB)</option>
+                <option value="Scene-no-images-pretty.json">Scene-no-images-pretty.json (Pink placeholders, formatted - 921KB)</option>
+            </select>
+            <button id="play-btn">Play</button>
+            <button id="pause-btn">Pause</button>
+            <button id="stop-btn">Stop</button>
+            <button id="reload-btn">Reload</button>
+        </div>
+
+        <div id="lottie-container"></div>
+
+        <div class="info">
+            <strong>Status:</strong> <span id="status">Ready to load animation</span><br>
+            <strong>Frame:</strong> <span id="frame">-</span> / <span id="total-frames">-</span>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script>
+        let animation = null;
+        const container = document.getElementById('lottie-container');
+        const fileSelect = document.getElementById('file-select');
+        const statusEl = document.getElementById('status');
+        const frameEl = document.getElementById('frame');
+        const totalFramesEl = document.getElementById('total-frames');
+
+        function loadAnimation() {
+            if (animation) {
+                animation.destroy();
+            }
+
+            const fileName = fileSelect.value;
+            statusEl.textContent = `Loading ${fileName}...`;
+
+            animation = lottie.loadAnimation({
+                container: container,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: fileName
+            });
+
+            animation.addEventListener('DOMLoaded', () => {
+                statusEl.textContent = `Loaded ${fileName} - Playing`;
+                totalFramesEl.textContent = Math.floor(animation.totalFrames);
+            });
+
+            animation.addEventListener('enterFrame', () => {
+                frameEl.textContent = Math.floor(animation.currentFrame);
+            });
+
+            animation.addEventListener('data_failed', (error) => {
+                statusEl.textContent = `Error loading ${fileName}`;
+                console.error('Failed to load animation:', error);
+            });
+        }
+
+        document.getElementById('play-btn').addEventListener('click', () => {
+            if (animation) {
+                animation.play();
+                statusEl.textContent = 'Playing';
+            }
+        });
+
+        document.getElementById('pause-btn').addEventListener('click', () => {
+            if (animation) {
+                animation.pause();
+                statusEl.textContent = 'Paused';
+            }
+        });
+
+        document.getElementById('stop-btn').addEventListener('click', () => {
+            if (animation) {
+                animation.stop();
+                statusEl.textContent = 'Stopped';
+            }
+        });
+
+        document.getElementById('reload-btn').addEventListener('click', () => {
+            loadAnimation();
+        });
+
+        fileSelect.addEventListener('change', () => {
+            loadAnimation();
+        });
+
+        // Load default animation on page load
+        loadAnimation();
+    </script>
+</body>
+</html>
