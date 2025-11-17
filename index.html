@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quix.io Animation</title>
+    <title>Quix.io Animation - Engineering Data Management</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,15 +20,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
             overflow: hidden;
         }
 
         .container {
             width: 1080px;
             height: 1080px;
-            background: #222229;
+            background: linear-gradient(135deg, #222229 0%, #1a1a1f 100%);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
             overflow: hidden;
         }
 
@@ -40,420 +45,456 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px;
             opacity: 0;
+            transform: scale(0.9);
+            text-align: center;
+            padding: 60px;
+            box-sizing: border-box;
         }
 
         .background-gradient {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0.15;
-            filter: blur(100px);
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 100, 255, 0.06) 0%, transparent 70%);
+            animation: rotate 25s linear infinite;
+            z-index: 1;
         }
 
-        .gradient-circle {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite;
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .circle-1 {
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, #0064FF, transparent);
-            top: -200px;
-            left: -200px;
-            animation-delay: 0s;
-        }
-
-        .circle-2 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #BD2EFF, transparent);
-            bottom: -150px;
-            right: -150px;
-            animation-delay: 1s;
-        }
-
-        .circle-3 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #FF7828, transparent);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: 2s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.1); }
-            66% { transform: translate(-30px, 30px) scale(0.9); }
-        }
-
-        h1 {
-            font-size: 96px;
+        .main-title {
+            font-size: 68px;
             font-weight: 800;
-            color: #ffffff;
-            text-align: center;
-            line-height: 1.1;
+            color: #fff;
             margin-bottom: 40px;
-            position: relative;
             z-index: 10;
+            line-height: 1.1;
+            max-width: 900px;
         }
 
-        h2 {
-            font-size: 72px;
+        .problem-title {
+            font-size: 52px;
             font-weight: 700;
-            color: #ffffff;
-            text-align: center;
-            line-height: 1.2;
+            color: #fff;
             margin-bottom: 30px;
-            position: relative;
+            z-index: 10;
+            line-height: 1.2;
+        }
+
+        .solution-title {
+            font-size: 56px;
+            font-weight: 700;
+            color: #0064FF;
+            margin-bottom: 20px;
+            z-index: 10;
+            line-height: 1.2;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 25px;
+            z-index: 10;
+            line-height: 1.3;
+        }
+
+        .subsection-title {
+            font-size: 36px;
+            font-weight: 600;
+            color: #BD2EFF;
+            margin-bottom: 20px;
             z-index: 10;
         }
 
-        .subtitle {
-            font-size: 32px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            position: relative;
+        .bullet-point {
+            font-size: 28px;
+            color: #ccc;
+            margin: 15px 0;
+            opacity: 0;
+            transform: translateX(-30px);
+            max-width: 850px;
+            line-height: 1.5;
             z-index: 10;
         }
 
-        .highlight {
-            background: linear-gradient(90deg, #0064FF, #BD2EFF, #FF7828);
+        .benefit-point {
+            font-size: 28px;
+            color: #fff;
+            margin: 12px 0;
+            opacity: 0;
+            transform: translateX(-30px);
+            max-width: 850px;
+            line-height: 1.5;
+            z-index: 10;
+        }
+
+        .description {
+            font-size: 36px;
+            color: #aaa;
+            max-width: 900px;
+            line-height: 1.5;
+            z-index: 10;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 120px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #0064FF, #BD2EFF, #FF7828);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            z-index: 10;
         }
 
-        .accent-blue { color: #0064FF; }
-        .accent-purple { color: #BD2EFF; }
-        .accent-orange { color: #FF7828; }
-
-        /* Data visualization elements */
-        .data-viz {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 5;
+        .category-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            margin-top: 30px;
+            z-index: 10;
         }
 
-        .data-point {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #0064FF;
-            opacity: 0;
-        }
-
-        .data-line {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, #0064FF, transparent);
-            opacity: 0;
-        }
-
-        .grid {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(rgba(0, 100, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 100, 255, 0.1) 1px, transparent 1px);
-            background-size: 60px 60px;
-            opacity: 0;
-        }
-
-        /* Icon elements */
-        .icon-container {
+        .image-container {
             position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 40px 0;
-        }
-
-        .icon-box {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            border: 3px solid;
+            width: 500px;
+            height: 375px;
             border-radius: 16px;
+            overflow: hidden;
             opacity: 0;
+            transform: scale(0.8) translateY(30px);
+            z-index: 10;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .box-1 {
-            border-color: #0064FF;
-            top: 0;
-            left: 0;
-        }
-        .box-2 {
-            border-color: #BD2EFF;
-            top: 0;
-            right: 0;
-        }
-        .box-3 {
-            border-color: #FF7828;
-            bottom: 0;
-            left: 0;
-        }
-        .box-4 {
-            border-color: #0064FF;
-            bottom: 0;
-            right: 0;
-        }
-
-        /* Wave animation for real-time */
-        .wave-container {
-            position: relative;
-            width: 600px;
-            height: 200px;
-            margin: 40px 0;
-        }
-
-        .wave {
-            position: absolute;
+        .category-image {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .scene.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .highlight-blue { color: #0064FF; }
+        .highlight-purple { color: #BD2EFF; }
+        .highlight-orange { color: #FF7828; }
+
+        /* Problem indicators */
+        .problem-box {
+            background: rgba(255, 40, 40, 0.08);
+            border: 2px solid rgba(255, 40, 40, 0.2);
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin: 15px auto;
+            opacity: 0;
+            transform: translateX(-50px);
+            width: 850px;
+            max-width: 850px;
+        }
+
+        /* Solution indicators */
+        .solution-box {
+            background: rgba(0, 100, 255, 0.08);
+            border: 2px solid rgba(0, 100, 255, 0.25);
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin: 15px auto;
+            opacity: 0;
+            transform: translateX(50px);
+            width: 850px;
+            max-width: 850px;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 4px;
             height: 4px;
             background: #0064FF;
-            transform-origin: left;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float-particle 8s infinite linear;
         }
 
-        /* Logo */
-        .logo {
-            font-size: 120px;
-            font-weight: 800;
-            color: #0064FF;
-            position: relative;
-            z-index: 10;
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.6; transform: scale(1); }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100px) scale(0); opacity: 0; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Background gradients -->
-        <div class="background-gradient">
-            <div class="gradient-circle circle-1"></div>
-            <div class="gradient-circle circle-2"></div>
-            <div class="gradient-circle circle-3"></div>
+        <div class="background-gradient"></div>
+        
+        <!-- Floating particles -->
+        <div class="particle" style="left: 10%; animation-delay: 0s; background: #0064FF;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 2s; background: #BD2EFF;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 4s; background: #FF7828;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 6s; background: #0064FF;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 1s; background: #BD2EFF;"></div>
+        
+        <!-- Scene 1: Take control of your test data -->
+        <div class="scene" id="scene1">
+            <h1 class="main-title">Take control of your <span class="highlight-blue">test data</span></h1>
         </div>
 
-        <!-- Scene 1: Main headline -->
-        <div class="scene scene-1">
-            <h1>Take control of your <span class="highlight">test data</span></h1>
-        </div>
-
-        <!-- Scene 2: All your data in one place -->
-        <div class="scene scene-2">
-            <h2>All your data<br><span class="accent-blue">in one place</span></h2>
-            <div class="icon-container">
-                <div class="icon-box box-1"></div>
-                <div class="icon-box box-2"></div>
-                <div class="icon-box box-3"></div>
-                <div class="icon-box box-4"></div>
+        <!-- Scene 2: The Problem -->
+        <div class="scene" id="scene2">
+            <h2 class="problem-title">Test data is the <span class="highlight-orange">engineering bottleneck</span></h2>
+            <div class="problem-box">
+                <div class="bullet-point">After tests are run, data takes too long to be actionable</div>
+            </div>
+            <div class="problem-box">
+                <div class="bullet-point">Results and configs are scattered across drives in different formats</div>
+            </div>
+            <div class="problem-box">
+                <div class="bullet-point">Results lack config context, making them hard to interpret</div>
             </div>
         </div>
 
-        <!-- Scene 3: Real results in real time -->
-        <div class="scene scene-3">
-            <div class="grid"></div>
-            <h2><span class="accent-purple">Real results</span><br>in real time</h2>
-            <div class="wave-container">
-                <svg width="600" height="200" viewBox="0 0 600 200" style="position: absolute;">
-                    <path id="wavePath" d="" stroke="#0064FF" stroke-width="4" fill="none" opacity="0"/>
-                </svg>
+        <!-- Scene 3: The Solution -->
+        <div class="scene" id="scene3">
+            <h2 class="solution-title">You need Quix</h2>
+            <p class="section-title">The platform for <span class="highlight-purple">engineering data management</span></p>
+            <div class="solution-box">
+                <div class="benefit-point">Monitor experiments from anywhere</div>
+            </div>
+            <div class="solution-box">
+                <div class="benefit-point">Make sure engineers always have the full context</div>
+            </div>
+            <div class="solution-box">
+                <div class="benefit-point">Pull the data into the tools you already use</div>
             </div>
         </div>
 
-        <!-- Scene 4: Join test and config data -->
-        <div class="scene scene-4">
-            <h2>Join test and<br><span class="accent-orange">config data</span></h2>
-            <div class="data-viz">
-                <div class="data-line" style="top: 40%; left: 10%; width: 30%;"></div>
-                <div class="data-line" style="top: 50%; right: 10%; width: 35%;"></div>
-                <div class="data-line" style="top: 60%; left: 25%; width: 40%;"></div>
-                <div class="data-point" style="top: 40%; left: 10%;"></div>
-                <div class="data-point" style="top: 40%; left: 40%;"></div>
-                <div class="data-point" style="top: 50%; right: 10%; background: #BD2EFF;"></div>
-                <div class="data-point" style="top: 50%; right: 45%; background: #BD2EFF;"></div>
-                <div class="data-point" style="top: 60%; left: 25%; background: #FF7828;"></div>
-                <div class="data-point" style="top: 60%; left: 65%; background: #FF7828;"></div>
+        <!-- Scene 4: Beyond Test Rigs -->
+        <div class="scene" id="scene4">
+            <h2 class="section-title"><span class="highlight-orange">Test rigs</span> are just the beginning</h2>
+            <p class="description">Quix empowers engineers to build solutions across the full test and development lifecycle</p>
+        </div>
+
+        <!-- Scene 5: Simulations -->
+        <div class="scene" id="scene5">
+            <h3 class="subsection-title">Simulations</h3>
+            <div class="category-container">
+                <div class="image-container">
+                    <img src="image_assets/69039881e300293cc2bcd8a2_Home - simulations.jpg" alt="Simulations" class="category-image">
+                </div>
+                <div class="bullet-point">Integrate with any virtual testing environments to build workflows across SIL, MIL, HIL, CFD, FEA and more</div>
+                <div class="bullet-point">Link simulation results with their configurations in one indexed record, making every run easy to query and trace</div>
             </div>
         </div>
 
-        <!-- Scene 5: Open data formats via API -->
-        <div class="scene scene-5">
-            <h2><span class="accent-blue">Open data formats</span><br>via API</h2>
-            <div class="subtitle">{ JSON • REST • GraphQL }</div>
+        <!-- Scene 6: Real World Tests -->
+        <div class="scene" id="scene6">
+            <h3 class="subsection-title">Real world tests</h3>
+            <div class="category-container">
+                <div class="image-container">
+                    <img src="image_assets/69039881edf33cfde4615535_Home - real world tests.jpg" alt="Real World Tests" class="category-image">
+                </div>
+                <div class="bullet-point">Quix collects hardware data from physical tests, attaches conditions and config details, and streams it into one place for easy comparison and traceability</div>
+                <div class="bullet-point">Query physical test data against virtual test data to accelerate model correlation and system verification and validation</div>
+            </div>
         </div>
 
-        <!-- Scene 6: Closing -->
-        <div class="scene scene-6">
+        <!-- Scene 7: Production Processes -->
+        <div class="scene" id="scene7">
+            <h3 class="subsection-title">Production processes</h3>
+            <div class="category-container">
+                <div class="image-container">
+                    <img src="image_assets/69039882265360493f805035_Home - production processes.jpg" alt="Production Processes" class="category-image">
+                </div>
+                <div class="bullet-point">Quix streams live data from production machines and links it to the exact process configuration, helping industrial engineers to develop and optimize novel production processes</div>
+            </div>
+        </div>
+
+        <!-- Scene 8: Final Logo -->
+        <div class="scene" id="scene8">
             <div class="logo">QUIX</div>
-            <div class="subtitle" style="margin-top: 40px;">The platform for engineering data management</div>
+            <p class="section-title" style="margin-top: 30px;">The platform for <span class="highlight-purple">engineering data management</span></p>
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
-        // Animation timeline
-        const tl = gsap.timeline({ repeat: -1 });
+        const scenes = document.querySelectorAll('.scene');
+        let currentScene = 0;
+        const sceneDurations = [5000, 8000, 7000, 4000, 7000, 7000, 6000, 5000]; // Longer durations for readability
+        let animationTimer;
 
-        // Helper function to animate scene
-        function animateScene(scene, duration, customAnimation) {
-            tl.to(scene, {
+        function showScene(index) {
+            // Hide all scenes
+            scenes.forEach(scene => {
+                scene.classList.remove('active');
+                gsap.set(scene, { opacity: 0, scale: 0.9 });
+            });
+
+            // Show current scene
+            const scene = scenes[index];
+            scene.classList.add('active');
+            
+            gsap.to(scene, {
                 opacity: 1,
-                duration: 0.5,
+                scale: 1,
+                duration: 0.8,
                 ease: "power2.out"
             });
 
-            if (customAnimation) {
-                customAnimation();
+            // Scene-specific animations
+            switch(index) {
+                case 0: // Take control
+                    gsap.fromTo('.main-title', 
+                        { scale: 0.8, opacity: 0, y: 20 },
+                        { scale: 1, opacity: 1, y: 0, duration: 1.2, ease: "elastic.out(1, 0.8)" }
+                    );
+                    break;
+                    
+                case 1: // Problem scene
+                    gsap.fromTo('.problem-title', 
+                        { y: -30, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.2 }
+                    );
+                    gsap.to('.problem-box', {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.6,
+                        stagger: 0.3,
+                        ease: "power2.out",
+                        delay: 0.8
+                    });
+                    gsap.to('#scene2 .bullet-point', {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.5,
+                        stagger: 0.3,
+                        ease: "power2.out",
+                        delay: 1.1
+                    });
+                    break;
+                    
+                case 2: // Solution scene
+                    gsap.fromTo('.solution-title', 
+                        { scale: 0.8, opacity: 0 },
+                        { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)", delay: 0.2 }
+                    );
+                    gsap.fromTo('#scene3 .section-title', 
+                        { y: 30, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.7, ease: "power2.out", delay: 0.5 }
+                    );
+                    gsap.to('.solution-box', {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.6,
+                        stagger: 0.25,
+                        ease: "power2.out",
+                        delay: 1.0
+                    });
+                    gsap.to('#scene3 .benefit-point', {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.5,
+                        stagger: 0.25,
+                        ease: "power2.out",
+                        delay: 1.3
+                    });
+                    break;
+                    
+                case 3: // Beyond test rigs
+                    gsap.fromTo('#scene4 .section-title', 
+                        { y: -40, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.9, ease: "power2.out", delay: 0.2 }
+                    );
+                    gsap.fromTo('#scene4 .description', 
+                        { y: 30, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.7, ease: "power2.out", delay: 0.6 }
+                    );
+                    break;
+                    
+                case 4: // Simulations
+                case 5: // Real world tests  
+                case 6: // Production processes
+                    const sceneId = `#scene${index + 1}`;
+                    gsap.fromTo(`${sceneId} .subsection-title`, 
+                        { scale: 0.8, opacity: 0 },
+                        { scale: 1, opacity: 1, duration: 0.7, ease: "back.out(1.7)", delay: 0.2 }
+                    );
+                    gsap.to(`${sceneId} .image-container`, {
+                        opacity: 1,
+                        scale: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power2.out",
+                        delay: 0.5
+                    });
+                    gsap.to(`${sceneId} .bullet-point`, {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.6,
+                        stagger: 0.3,
+                        ease: "power2.out",
+                        delay: 1.0
+                    });
+                    break;
+                    
+                case 7: // Final logo
+                    gsap.fromTo('.logo', 
+                        { scale: 0.6, rotation: -15, opacity: 0 },
+                        { scale: 1, rotation: 0, opacity: 1, duration: 1.2, ease: "elastic.out(1, 0.6)", delay: 0.2 }
+                    );
+                    gsap.fromTo('#scene8 .section-title', 
+                        { y: 40, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.8 }
+                    );
+                    break;
             }
-
-            tl.to(scene, {
-                opacity: 0,
-                duration: 0.5,
-                ease: "power2.in"
-            }, `+=${duration - 0.5}`);
         }
 
-        // Scene 1: Main headline
-        animateScene('.scene-1', 5, () => {
-            tl.fromTo('.scene-1 h1',
-                { scale: 0.8, y: 50 },
-                { scale: 1, y: 0, duration: 1, ease: "back.out(1.7)" },
-                "-=0.5"
-            );
-        });
+        function nextScene() {
+            currentScene = (currentScene + 1) % scenes.length;
+            showScene(currentScene);
+            
+            // Schedule next scene with variable timing
+            animationTimer = setTimeout(nextScene, sceneDurations[currentScene]);
+        }
 
-        // Scene 2: All your data in one place
-        animateScene('.scene-2', 5, () => {
-            tl.fromTo('.scene-2 h2',
-                { y: 30, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-                "-=0.5"
-            );
-            tl.to('.scene-2 .icon-box', {
-                opacity: 1,
-                scale: 1,
-                stagger: 0.1,
-                duration: 0.5,
-                ease: "back.out(1.7)"
-            }, "-=0.3");
-            // Animate boxes coming together
-            tl.to('.scene-2 .icon-box', {
-                top: "50%",
-                left: "50%",
-                x: "-50%",
-                y: "-50%",
-                duration: 0.8,
-                ease: "power2.inOut",
-                stagger: 0.05
-            }, "+=0.5");
-        });
+        function resetAnimations() {
+            gsap.set('.problem-box', { opacity: 0, x: -50 });
+            gsap.set('.solution-box', { opacity: 0, x: 50 });
+            gsap.set('.bullet-point', { opacity: 0, x: -30 });
+            gsap.set('.benefit-point', { opacity: 0, x: -30 });
+            gsap.set('.image-container', { opacity: 0, scale: 0.8, y: 30 });
+        }
 
-        // Scene 3: Real results in real time
-        animateScene('.scene-3', 5, () => {
-            tl.to('.scene-3 .grid', {
-                opacity: 1,
-                duration: 0.5
-            }, "-=0.5");
-            tl.fromTo('.scene-3 h2',
-                { x: -30, opacity: 0 },
-                { x: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-                "-=0.3"
-            );
+        // Initialize
+        showScene(0);
+        animationTimer = setTimeout(nextScene, sceneDurations[0]);
 
-            // Animated wave
-            const path = document.getElementById('wavePath');
-            let pathD = 'M 0 100 ';
-            for (let i = 0; i <= 600; i += 20) {
-                const y = 100 + Math.sin(i / 50) * 40;
-                pathD += `L ${i} ${y} `;
+        // Reset before each loop
+        const totalDuration = sceneDurations.reduce((a, b) => a + b, 0);
+        setInterval(resetAnimations, totalDuration - 500);
+
+        // Pause/resume on click
+        let isPaused = false;
+        document.addEventListener('click', () => {
+            if (isPaused) {
+                animationTimer = setTimeout(nextScene, 1000);
+                isPaused = false;
+            } else {
+                clearTimeout(animationTimer);
+                isPaused = true;
             }
-            path.setAttribute('d', pathD);
-
-            tl.to('#wavePath', {
-                opacity: 1,
-                duration: 0.5
-            }, "-=0.3");
-
-            tl.to('#wavePath', {
-                strokeDasharray: "10 5",
-                strokeDashoffset: -100,
-                duration: 3,
-                ease: "none"
-            }, "-=0.3");
-        });
-
-        // Scene 4: Join test and config data
-        animateScene('.scene-4', 5, () => {
-            tl.fromTo('.scene-4 h2',
-                { scale: 0.9, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 0.8, ease: "power2.out" },
-                "-=0.5"
-            );
-            tl.to('.scene-4 .data-point', {
-                opacity: 1,
-                scale: 1.5,
-                stagger: 0.1,
-                duration: 0.4,
-                ease: "back.out(2)"
-            }, "-=0.3");
-            tl.to('.scene-4 .data-line', {
-                opacity: 1,
-                scaleX: 1,
-                stagger: 0.15,
-                duration: 0.6,
-                ease: "power2.out"
-            }, "-=0.2");
-        });
-
-        // Scene 5: Open data formats
-        animateScene('.scene-5', 5, () => {
-            tl.fromTo('.scene-5 h2',
-                { y: -30, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-                "-=0.5"
-            );
-            tl.fromTo('.scene-5 .subtitle',
-                { y: 30, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-                "-=0.4"
-            );
-
-            // Pulse effect on subtitle
-            tl.to('.scene-5 .subtitle', {
-                scale: 1.05,
-                duration: 0.5,
-                yoyo: true,
-                repeat: 3,
-                ease: "power1.inOut"
-            }, "-=0.3");
-        });
-
-        // Scene 6: Closing
-        animateScene('.scene-6', 5, () => {
-            tl.fromTo('.scene-6 .logo',
-                { scale: 0.5, rotation: -180, opacity: 0 },
-                { scale: 1, rotation: 0, opacity: 1, duration: 1.2, ease: "back.out(1.4)" },
-                "-=0.5"
-            );
-            tl.fromTo('.scene-6 .subtitle',
-                { y: 30, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-                "-=0.4"
-            );
-        });
-
-        // Start animation on load
-        window.addEventListener('load', () => {
-            tl.play();
         });
     </script>
 </body>
